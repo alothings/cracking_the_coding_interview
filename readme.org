@@ -1,8 +1,8 @@
 * Solutions for the Book Cracking the Coding Interview
 
-In this repo, I be solving the problems in [[][]] and Python.
+  In this repo, I be solving the problems in [[java/readme.org][java]] and [[python/][python]].
 
-**Chapters:
+** Chapters:
 - Ch 3 Stacks and Queues
 - Ch 4 Trees and Graphs
 - Ch 6 Math and Logic
