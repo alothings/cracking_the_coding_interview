@@ -1,0 +1,13 @@
+* Solutions for the Book Cracking the Coding Interview
+
+In this repo, I be solving the problems in [[][]] and Python.
+
+**Chapters:
+- Ch 3 Stacks and Queues
+- Ch 4 Trees and Graphs
+- Ch 6 Math and Logic
+- Ch 7 Object Oriented Design
+- Ch 8 Recursion and Dynamic Programming
+- Ch 10 Sorting and Searching Algorithms
+
+
