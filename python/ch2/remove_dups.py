@@ -14,11 +14,29 @@ def remove_dups(ll):
             current = current.next
     return ll
 
+def remove_dups_runner(ll):
+    current = ll.head
+    while current:
+        runner = current
+        while runner.next:
+            if current.value is not runner.next.value:
+                runner = runner.value
+            else:
+                runner.next = runner.next.next
+    return ll
+
+
 ll = LinkedList()
-ll.generate(20, 0, 9)
+ll.generate(100, 0, 6)
 print(ll)
 remove_dups(ll)
 print("Result: ", ll)
+
+ll2 = LinkedList()
+ll2.generate(100, 0, 6)
+print(ll2)
+remove_dups(ll2)
+print("Result: ", ll2)
 
 
 
