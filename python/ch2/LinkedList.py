@@ -35,6 +35,10 @@ class LinkedList:
             self.tail = self.tail.next
         return self.tail
 
+    def add_multiple(self, values):
+        for v in values:
+            self.add(v)
+
     def generate(self, n, min, max):
         self.head = self.tail = None
         for i in range(n):
