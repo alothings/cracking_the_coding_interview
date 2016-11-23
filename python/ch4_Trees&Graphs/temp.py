@@ -1,137 +1,114 @@
+class Node:
+    def __init__(self, info):  # constructor of class
 
-class NodeLL(object):
+        self.info = info  # information for node
+        self.left = None  # left leef
+        self.right = None  # right leef
+        self.level = None  # level none defined
 
-    def __init__(self, data, next=None):
-        self.data = data
-        self.next = next
+    def __str__(self):
+        return str(self.info)  # return as string
 
 
-class LinkedList(object): # queue behavior
+class searchtree:
+    def __init__(self):  # constructor of class
 
-    def __init__(self, head=None):
-        self.head = head
+        self.root = None
 
-    def append(self, data):
-        if self.head is None:
-            self.head = NodeLL(data)
+    def create(self, val):  # create binary search tree nodes
+
+        if self.root == None:
+
+            self.root = Node(val)
+
         else:
-            x = self.head
-            while x.next:
-                x = x.next
-            x.next = NodeLL(data)
 
-    def remove(self):
-        if self.head is None:
-            return None
-        else:
-            data = self.head.data
-            self.head = self.head.next
-            return data
+            current = self.root
 
-    def peek(self):
-        if self.head is None:
-            return None
-        else:
-            return self.head.data
+            while 1:
 
-    def show(self):
-        x = self.head
-        while x is not None:
-            print(x.data.key, "-> ", end='')
-            x = x.next
-        print(None)
+                if val < current.info:
 
-class NodeBST(object):
+                    if current.left:
+                        current = current.left
+                    else:
+                        current.left = Node(val)
+                        break;
 
-    def __init__(self, key, val=None):
-        self.key = key
-        self.val = val
-        self.left = None
-        self.right = None
+                elif val > current.info:
 
+                    if current.right:
+                        current = current.right
+                    else:
+                        current.right = Node(val)
+                        break;
 
-class BST(object):
+                else:
+                    break
 
-    def __init__(self, root=None):
-        self.root = root
+    def bft(self):  # Breadth-First Traversal
 
-    def put(self, key, val=None):
-        self.root = self._put(key, val, self.root)
-        return self.root
+        self.root.level = 0
+        queue = [self.root]
+        out = []
+        current_level = self.root.level
 
-    def _put(self, key, val, x):
-        if x is None:
-            return NodeBST(key, val)
-        if key < x.key:
-            x.left = self._put(key, val, x.left)
-        elif key > x.key:
-            x.right = self._put(key, val, x.right)
-        else:
-            x.val = val
-        return x
+        while len(queue) > 0:
 
-    def get(self, key):
-        x = self._get(key, self.root)
-        if x is None:
-            return None
-        else:
-            return x.val
+            current_node = queue.pop(0)
 
-    def _get(self, key, x):
-        if x is None:
-            return None
-        if key < x.key:
-            return self._put(key, val, x.left)
-        elif key > x.key:
-            return self._put(key, val, x.right)
-        else:
-            return val
+            if current_node.level > current_level:
+                current_level += 1
+                out.append("\n")
 
+            out.append(str(current_node.info) + " ")
 
-def list_of_depths(bt):
-    prev_depth = None
-    current_depth = 0
-    queue = [ (bt.root, current_depth) ] # add left, remove right
-    depths = []
-    while len(queue) != 0:
-        x, current_depth = queue.pop()
-        if current_depth != prev_depth:
-            ll = LinkedList()
-        else:
-            ll = depths.pop()
-        ll.append(x)
-        depths.append(ll)
-        if x.left:
-            queue.insert(0, (x.left, current_depth+1))
-        if x.right:
-            queue.insert(0, (x.right, current_depth+1))
-        prev_depth = current_depth
-    return depths
+            if current_node.left:
+                current_node.left.level = current_level + 1
+                queue.append(current_node.left)
+
+            if current_node.right:
+                current_node.right.level = current_level + 1
+                queue.append(current_node.right)
+
+        print("".join(out))
+
+    def inorder(self, node):
+
+        if node is not None:
+            self.inorder(node.left)
+            print(node.info)
+
+            self.inorder(node.right)
+
+    def preorder(self, node):
+
+        if node is not None:
+            print(node.info)
+            self.preorder(node.left)
+            self.preorder(node.right)
+
+    def postorder(self, node):
+
+        if node is not None:
+            self.postorder(node.left)
+            self.postorder(node.right)
+            print(node.info)
 
 
-if __name__ == "__main__":
-    bst = BST()
-    bst.put(8)
-    bst.put(4)
-    bst.put(12)
-    bst.put(2)
-    bst.put(6)
-    bst.put(10)
-    bst.put(14)
-    bst.put(1)
-    bst.put(3)
-    bst.put(5)
-    bst.put(7)
-    bst.put(9)
-    bst.put(11)
-    bst.put(13)
-    bst.put(15)
-    depths = list_of_depths(bst)
-    for d in depths:
-        d.show()
-    print("------------------------------------")
-    bst.put(16)
-    bst.put(17)
-    depths = list_of_depths(bst)
-    for d in depths:
-        d.show()
+tree = searchtree()
+arr = [8, 3, 1, 6, 4, 7, 10, 14, 13]
+for i in arr:
+    tree.create(i)
+# print
+# 'Breadth-First Traversal'
+# tree.bft()
+# print
+# 'Inorder Traversal'
+print(tree.inorder(tree.root))
+# print
+# 'Preorder Traversal'
+# tree.preorder(tree.root)
+# print
+# 'Postorder Traversal'
+# tree.postorder(tree.root)
